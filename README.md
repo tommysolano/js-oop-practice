@@ -1,1 +1,1 @@
-practica de js con programacion orientado a objetos
+practica aplicacion de productos en js con programacion orientado a objetos
