@@ -30,11 +30,22 @@ class UI {
     deleteProduct(element){
         if(element.name === "delete"){
             element.parentElement.parentElement.parentElement.remove()
+            this.showMessage("Product deleted successfully", "info")
         }
     }
 
-    showMessage(){
+    showMessage(message, cssClasss){
+        const div = document.createElement("div")
+        div.className = "alert alert-"+cssClasss+ " mt-2"
+        div.appendChild(document.createTextNode(message))
+        
+        const container = document.querySelector(".container")
+        const app = document.querySelector("#App")
+        container.insertBefore(div, app)
 
+        setTimeout(function (){
+            document.querySelector(".alert").remove()
+        }, 2000)
     }
 }
 
@@ -49,8 +60,14 @@ document.getElementById("product-form")
         const product = new Product(name, price, year)
         
         const ui = new UI()
+        if(name === "" || price === "" || year === ""){
+            return ui.showMessage("complete fields", "danger")
+        }
+
+        
         ui.addProduct(product)
         ui.resetForm()
+        ui.showMessage("product added successfully", "success")
 
         e.preventDefault();
     })
